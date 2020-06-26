@@ -18,31 +18,18 @@ public class JpaMain {
 
     tx.begin();
     try {
-//      데이터 추가
-//      Member member = new Member();
-//      member.setId(2l);
-//      member.setName("HelloB");
-//      em.persist(member);
-//      데이터 조회
-//      Member member = em.find(Member.class, 1l);
-//      System.out.println(member.getId());
-//      System.out.println(member.getName());
 
-//      데이터 변경
-//      Member member = em.find(Member.class, 1l);
-//      member.setName("helloJPA");
-//      System.out.println(member.getId());
-//      System.out.println(member.getName());
+      Album album = new Album();
+      album.setMusician("MCR");
+      album.setName("Welcome to the black parade");
 
-      List<Member> allMember = em.createQuery("select m from Member as m ", Member.class)
-          .setFirstResult(5)
-          .setMaxResults(10)
-          .getResultList();
+      em.persist(album);
 
-      for(Member m: allMember){
-        System.out.println("member.id= " + m.getId());
-        System.out.println("member.name= " + m.getName());
-      }
+      em.flush();
+      em.clear();
+
+      Album album1 = em.find(Album.class, album.getId());
+      System.out.println("album1 = " + album1);
 
       tx.commit();
 
